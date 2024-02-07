@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"crypto/sha256"
+	"crypto/tls"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
@@ -1266,6 +1267,7 @@ func makeRequest(ctx context.Context, method string, requestURL *url.URL, header
 	client := http.Client{
 		Transport: &http.Transport{
 			Proxy: http.ProxyURL(proxyURL),
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 		},
 	}
 
